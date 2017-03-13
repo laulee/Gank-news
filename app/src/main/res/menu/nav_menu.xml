@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_android"
+            android:icon="@mipmap/ic_launcher"
+            android:title="Android"></item>
+        <item
+            android:id="@+id/nav_ios"
+            android:icon="@mipmap/ic_launcher"
+            android:title="IOS"></item>
+        <item
+            android:id="@+id/nav_fuli"
+            android:icon="@mipmap/ic_launcher"
+            android:title="福利"></item>
+
+        <item
+            android:id="@+id/nav_xiatuijian"
+            android:icon="@mipmap/ic_launcher"
+            android:title="瞎推荐"></item>
+        <item
+            android:id="@+id/nav_app"
+            android:icon="@mipmap/ic_launcher"
+            android:title="App"></item>
+
+    </group>
+</menu>

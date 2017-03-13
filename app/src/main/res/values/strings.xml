@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Gank-news</string>
+    <string name="usual_approach">常规方式</string>
+    <string name="reactive_approach">响应方式</string>
+
+    <string name="menu_add">添加</string>
+    <string name="menu_delete">删除</string>
+    <string name="app_intro">News App</string>
+    <string name="drawer_open">打开</string>
+    <string name="drawer_close">关闭</string>
+</resources>
