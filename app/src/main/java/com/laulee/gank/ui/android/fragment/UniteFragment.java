@@ -1,5 +1,6 @@
-package com.laulee.gank.ui.android;
+package com.laulee.gank.ui.android.fragment;
 
+import android.content.Intent;
 import android.support.design.widget.AppBarLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -10,53 +11,64 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.laulee.gank.R;
+import com.laulee.gank.app.Constants;
 import com.laulee.gank.base.BaseFragment;
 import com.laulee.gank.base.BaseRecyclerAdapter;
 import com.laulee.gank.bean.GankEntity;
-import com.laulee.gank.presenter.AndroidFragmentPresenter;
-import com.laulee.gank.presenter.contact.AndroidFragmentContact;
+import com.laulee.gank.presenter.UniteFragmentPresenter;
+import com.laulee.gank.presenter.contact.UntieFragmentContact;
+import com.laulee.gank.ui.android.activity.UniteDetailActivity;
+import com.laulee.gank.ui.android.adapter.UniteAdapter;
 import com.laulee.gank.utils.SystemUtil;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.BindView;
+
 /**
  * Created by laulee on 17/2/27.
  */
 
-public class AndroidFragment extends BaseFragment<AndroidFragmentPresenter>
-        implements AndroidFragmentContact.AndroidFragmentView {
+public class UniteFragment extends BaseFragment<UniteFragmentPresenter>
+        implements UntieFragmentContact.AndroidFragmentView {
 
+    @BindView(R.id.fragment_unite_swipe_layout)
     SwipeRefreshLayout swipeRefreshLayout;
+    @BindView(R.id.fragment_unite_image)
     ImageView ivBlur;
+    @BindView(R.id.fragment_unite_recycler)
     RecyclerView recyclerView;
-    private AndroidAdapter androidAdapter;
-    private AppBarLayout appBarLayout;
+    private UniteAdapter androidAdapter;
+    @BindView(R.id.fragment_unite_appbar)
+    AppBarLayout appBarLayout;
     private List<GankEntity> gankItemEntityList = new ArrayList<>( );
+    private String tech;
 
     @Override
     protected int setLayoutId() {
-        return R.layout.android_fragment_layout;
+        return R.layout.fragment_unite_layout;
     }
 
     @Override
-    protected AndroidFragmentPresenter createPresenter() {
-        return new AndroidFragmentPresenter( );
+    protected UniteFragmentPresenter createPresenter() {
+        return new UniteFragmentPresenter( );
     }
 
     @Override
     protected void initParams() {
-        mPresenter.getData( );
-        mPresenter.getImage( );
+        tech = getArguments( ).getString( UniteFragmentPresenter.TECH );
+    }
+
+    @Override
+    protected void lazyLoad() {
+        super.lazyLoad( );
+        mPresenter.getData( tech, 1 );
+        mPresenter.getImage( 20 );
     }
 
     @Override
     protected void initView( View rootView ) {
-        swipeRefreshLayout = (SwipeRefreshLayout) rootView
-                .findViewById( R.id.android_fragment_swipe_layout );
-        ivBlur = (ImageView) rootView.findViewById( R.id.android_fragment_image );
-        recyclerView = (RecyclerView) rootView.findViewById( R.id.android_fragment_recycler );
-        appBarLayout = (AppBarLayout) rootView.findViewById( R.id.android_fragment_appbar );
         recyclerView.setLayoutManager( new LinearLayoutManager( getContext( ) ) );
         appBarLayout.addOnOffsetChangedListener( new AppBarLayout.OnOffsetChangedListener( ) {
             @Override
@@ -77,9 +89,21 @@ public class AndroidFragment extends BaseFragment<AndroidFragmentPresenter>
         swipeRefreshLayout.setOnRefreshListener( new SwipeRefreshLayout.OnRefreshListener( ) {
             @Override
             public void onRefresh() {
-                mPresenter.getData( );
+                mPresenter.getData( tech, 1 );
             }
         } );
+
+        androidAdapter = new UniteAdapter( gankItemEntityList );
+        androidAdapter.setIOnItemClickListener(
+                new BaseRecyclerAdapter.IOnItemClickListener<GankEntity>( ) {
+                    @Override
+                    public void onItemClick( View view, GankEntity entity, int position ) {
+                        Intent intent = new Intent( getActivity( ), UniteDetailActivity.class );
+                        intent.putExtra( Constants.GANK_INFO, entity );
+                        startActivity( intent );
+                    }
+                } );
+        recyclerView.setAdapter( androidAdapter );
     }
 
     @Override
@@ -87,16 +111,7 @@ public class AndroidFragment extends BaseFragment<AndroidFragmentPresenter>
         if( swipeRefreshLayout.isRefreshing( ) ) {
             swipeRefreshLayout.setRefreshing( false );
         }
-        androidAdapter = new AndroidAdapter( gankItemEntities );
-        androidAdapter.setIOnItemClickListener(
-                new BaseRecyclerAdapter.IOnItemClickListener<GankEntity>( ) {
-                    @Override
-                    public void onItemClick( View view, GankEntity entity, int position ) {
-                        Toast.makeText( getContext( ), entity.getDesc( ), Toast.LENGTH_LONG )
-                                .show( );
-                    }
-                } );
-        recyclerView.setAdapter( androidAdapter );
+        androidAdapter.addList( gankItemEntities );
     }
 
     @Override

@@ -1,5 +1,6 @@
-package com.laulee.gank.ui.android;
+package com.laulee.gank.ui.main;
 
+import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
@@ -8,7 +9,9 @@ import android.view.View;
 import com.laulee.gank.R;
 import com.laulee.gank.base.BaseFragment;
 import com.laulee.gank.base.BasePresenter;
-import com.laulee.gank.ui.main.FragmentAdapter;
+import com.laulee.gank.presenter.UniteFragmentPresenter;
+import com.laulee.gank.ui.android.fragment.UniteFragment;
+import com.laulee.gank.ui.fuli.fragment.FuliFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,7 +32,7 @@ public class GankFragment extends BaseFragment {
 
     @Override
     protected int setLayoutId() {
-        return R.layout.gank_fragment_layout;
+        return R.layout.fragment_gank_layout;
     }
 
     @Override
@@ -52,10 +55,22 @@ public class GankFragment extends BaseFragment {
 
     private List<Fragment> initFragment() {
         List<Fragment> fragmentList = new ArrayList<>( );
-        fragmentList.add( new AndroidFragment( ) );
-        fragmentList.add( new AndroidFragment( ) );
-        fragmentList.add( new AndroidFragment( ) );
-        fragmentList.add( new AndroidFragment( ) );
+        UniteFragment androidFragment = new UniteFragment( );
+        Bundle androidBundle = new Bundle( );
+        androidBundle.putString( UniteFragmentPresenter.TECH, UniteFragmentPresenter.TECH_ANDROID );
+        androidFragment.setArguments( androidBundle );
+        UniteFragment iosFragment = new UniteFragment( );
+        Bundle iosBundle = new Bundle( );
+        iosBundle.putString( UniteFragmentPresenter.TECH, UniteFragmentPresenter.TECH_IOS );
+        iosFragment.setArguments( iosBundle );
+        UniteFragment webFragment = new UniteFragment( );
+        Bundle webBundle = new Bundle( );
+        webBundle.putString( UniteFragmentPresenter.TECH, UniteFragmentPresenter.TECH_WEB );
+        webFragment.setArguments( webBundle );
+        fragmentList.add( androidFragment );
+        fragmentList.add( iosFragment );
+        fragmentList.add( webFragment );
+        fragmentList.add( new FuliFragment( ) );
         return fragmentList;
     }
 

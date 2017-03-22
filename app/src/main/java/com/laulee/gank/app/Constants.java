@@ -21,4 +21,5 @@ public class Constants {
     public static final int FULI = 103;
     public static final int XIATUIJIAN = 104;
     public static final int APP = 105;
+    public static final String GANK_INFO = "gank_info";
 }

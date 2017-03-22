@@ -14,7 +14,7 @@ import java.util.List;
 public abstract class BaseRecyclerAdapter<T, VH extends RecyclerView.ViewHolder>
         extends RecyclerView.Adapter<VH> {
 
-    private List<T> datas;
+    protected List<T> datas;
     private IOnItemClickListener<T> listener;
 
     public BaseRecyclerAdapter( List<T> datas ) {
@@ -69,7 +69,7 @@ public abstract class BaseRecyclerAdapter<T, VH extends RecyclerView.ViewHolder>
      * @return
      */
     public T getItem( int position ) {
-        if( datas != null )
+        if( datas != null && datas.size( ) > 0 )
             return datas.get( position );
         return null;
     }
@@ -96,13 +96,13 @@ public abstract class BaseRecyclerAdapter<T, VH extends RecyclerView.ViewHolder>
     }
 
     public void addItem( T entity ) {
-        datas.add( entity );
-        this.notifyDataSetChanged( );
+        this.datas.add( entity );
+        notifyItemInserted( datas.size( ) - 1 );
     }
 
     public void addList( List<T> list ) {
-        datas.addAll( list );
-        this.notifyDataSetChanged( );
+        this.datas.addAll( list );
+        notifyDataSetChanged( );
     }
 
     /**

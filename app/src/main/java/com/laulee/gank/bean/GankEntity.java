@@ -1,12 +1,15 @@
 package com.laulee.gank.bean;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.List;
 
 /**
  * Created by laulee on 17/3/13.
  */
 
-public class GankEntity {
+public class GankEntity implements Parcelable {
 
     /**
      * _id : 58c264e6421aa90f13178640
@@ -32,6 +35,32 @@ public class GankEntity {
     private boolean used;
     private String who;
     private List<String> images;
+    private int height;
+
+    protected GankEntity( Parcel in ) {
+        _id = in.readString( );
+        createdAt = in.readString( );
+        desc = in.readString( );
+        publishedAt = in.readString( );
+        source = in.readString( );
+        type = in.readString( );
+        url = in.readString( );
+        used = in.readByte( ) != 0;
+        who = in.readString( );
+        images = in.createStringArrayList( );
+    }
+
+    public static final Creator<GankEntity> CREATOR = new Creator<GankEntity>( ) {
+        @Override
+        public GankEntity createFromParcel( Parcel in ) {
+            return new GankEntity( in );
+        }
+
+        @Override
+        public GankEntity[] newArray( int size ) {
+            return new GankEntity[size];
+        }
+    };
 
     public String get_id() { return _id;}
 
@@ -72,4 +101,31 @@ public class GankEntity {
     public List<String> getImages() { return images;}
 
     public void setImages( List<String> images ) { this.images = images;}
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel( Parcel dest, int flags ) {
+        dest.writeString( _id );
+        dest.writeString( createdAt );
+        dest.writeString( desc );
+        dest.writeString( publishedAt );
+        dest.writeString( source );
+        dest.writeString( type );
+        dest.writeString( url );
+        dest.writeByte( (byte) ( used ? 1 : 0 ) );
+        dest.writeString( who );
+        dest.writeStringList( images );
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
+    public void setHeight( int height ) {
+        this.height = height;
+    }
 }

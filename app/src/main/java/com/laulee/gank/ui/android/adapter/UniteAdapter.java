@@ -1,4 +1,4 @@
-package com.laulee.gank.ui.android;
+package com.laulee.gank.ui.android.adapter;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -10,13 +10,16 @@ import com.laulee.gank.bean.GankEntity;
 
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 /**
  * Created by laulee on 17/2/28.
  */
 
-public class AndroidAdapter extends BaseRecyclerAdapter<GankEntity, AndroidAdapter.ViewHolder> {
+public class UniteAdapter extends BaseRecyclerAdapter<GankEntity, UniteAdapter.ViewHolder> {
 
-    public AndroidAdapter( List<GankEntity> datas ) {
+    public UniteAdapter( List<GankEntity> datas ) {
         super( datas );
     }
 
@@ -32,21 +35,22 @@ public class AndroidAdapter extends BaseRecyclerAdapter<GankEntity, AndroidAdapt
 
     @Override
     protected void onBindViewHolder( ViewHolder holder, GankEntity entity ) {
-        holder.title.setText( entity.getSource( ) );
-        holder.author.setText( entity.getWho( ) );
+        holder.title.setText( entity.getDesc() );
+        holder.author.setText( entity.getWho() );
         holder.time.setText( entity.getCreatedAt( ) );
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
+        @BindView(R.id.tv_tech_title)
         TextView title;
+        @BindView(R.id.tv_tech_author)
         TextView author;
+        @BindView(R.id.tv_tech_time)
         TextView time;
 
         public ViewHolder( View itemView ) {
             super( itemView );
-            title = (TextView) itemView.findViewById( R.id.tv_tech_title );
-            author = (TextView) itemView.findViewById( R.id.tv_tech_author );
-            time = (TextView) itemView.findViewById( R.id.tv_tech_time );
+            ButterKnife.bind( this,itemView );
         }
     }
 }

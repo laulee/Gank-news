@@ -13,7 +13,6 @@ import com.laulee.gank.R;
 import com.laulee.gank.base.BaseActivity;
 import com.laulee.gank.base.BasePresenter;
 import com.laulee.gank.presenter.MainPrenster;
-import com.laulee.gank.ui.android.GankFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -73,16 +72,16 @@ public class MainActivity extends BaseActivity {
                                 switchFragment( fragments.get( 0 ) );
                                 break;
                             case R.id.nav_ios:
-                                switchFragment( fragments.get( 1 ) );
+                                switchFragment( fragments.get( 0 ) );
                                 break;
                             case R.id.nav_fuli:
-                                switchFragment( fragments.get( 2 ) );
+                                switchFragment( fragments.get( 0 ) );
                                 break;
                             case R.id.nav_xiatuijian:
-                                switchFragment( fragments.get( 3 ) );
+                                switchFragment( fragments.get( 0 ) );
                                 break;
                             case R.id.nav_app:
-                                switchFragment( fragments.get( 4 ) );
+                                switchFragment( fragments.get( 0 ) );
                                 break;
                         }
                         if( mLastMenuItem != null ) {
@@ -104,10 +103,6 @@ public class MainActivity extends BaseActivity {
      */
     private void initFragments() {
         fragments = new ArrayList<>( );
-        fragments.add( new GankFragment( ) );
-        fragments.add( new GankFragment( ) );
-        fragments.add( new GankFragment( ) );
-        fragments.add( new GankFragment( ) );
         fragments.add( new GankFragment( ) );
     }
 

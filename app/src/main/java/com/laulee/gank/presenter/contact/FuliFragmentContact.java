@@ -6,17 +6,14 @@ import com.laulee.gank.bean.GankEntity;
 import java.util.List;
 
 /**
- * Created by laulee on 17/2/27.
+ * Created by laulee on 17/3/22.
  */
 
-public class AndroidFragmentContact {
-
-    public interface AndroidFragmentView extends BaseView {
+public class FuliFragmentContact {
+    public interface View extends BaseView {
         void showContent( List<GankEntity> gankItemEntities );
 
         void showError( String message );
-
-        void showGirlImage( String url );
     }
 
 }
