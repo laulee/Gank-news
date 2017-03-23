@@ -1,4 +1,4 @@
-package com.laulee.gank.ui.android.adapter;
+package com.laulee.gank.ui.unite.adapter;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;

@@ -8,10 +8,9 @@ import android.view.View;
 
 import com.laulee.gank.R;
 import com.laulee.gank.base.BaseFragment;
-import com.laulee.gank.base.BasePresenter;
 import com.laulee.gank.presenter.UniteFragmentPresenter;
-import com.laulee.gank.ui.android.fragment.UniteFragment;
 import com.laulee.gank.ui.fuli.fragment.FuliFragment;
+import com.laulee.gank.ui.unite.fragment.UniteFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,11 +35,6 @@ public class GankFragment extends BaseFragment {
     }
 
     @Override
-    protected BasePresenter createPresenter() {
-        return null;
-    }
-
-    @Override
     protected void initParams() {
         gankViewPager.setOffscreenPageLimit( 3 );
         fragmentPagerAdapter = new FragmentAdapter( getFragmentManager( ), initFragment( ) );
@@ -53,6 +47,11 @@ public class GankFragment extends BaseFragment {
 
     }
 
+    /**
+     * 初始化fragment
+     *
+     * @return
+     */
     private List<Fragment> initFragment() {
         List<Fragment> fragmentList = new ArrayList<>( );
         UniteFragment androidFragment = new UniteFragment( );

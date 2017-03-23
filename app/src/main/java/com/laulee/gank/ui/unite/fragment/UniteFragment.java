@@ -1,4 +1,4 @@
-package com.laulee.gank.ui.android.fragment;
+package com.laulee.gank.ui.unite.fragment;
 
 import android.content.Intent;
 import android.support.design.widget.AppBarLayout;
@@ -12,13 +12,13 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.laulee.gank.R;
 import com.laulee.gank.app.Constants;
-import com.laulee.gank.base.BaseFragment;
 import com.laulee.gank.base.BaseRecyclerAdapter;
+import com.laulee.gank.base.RxBaseFragment;
 import com.laulee.gank.bean.GankEntity;
 import com.laulee.gank.presenter.UniteFragmentPresenter;
 import com.laulee.gank.presenter.contact.UntieFragmentContact;
-import com.laulee.gank.ui.android.activity.UniteDetailActivity;
-import com.laulee.gank.ui.android.adapter.UniteAdapter;
+import com.laulee.gank.ui.unite.activity.UniteDetailActivity;
+import com.laulee.gank.ui.unite.adapter.UniteAdapter;
 import com.laulee.gank.utils.SystemUtil;
 
 import java.util.ArrayList;
@@ -30,7 +30,7 @@ import butterknife.BindView;
  * Created by laulee on 17/2/27.
  */
 
-public class UniteFragment extends BaseFragment<UniteFragmentPresenter>
+public class UniteFragment extends RxBaseFragment<UniteFragmentPresenter>
         implements UntieFragmentContact.AndroidFragmentView {
 
     @BindView(R.id.fragment_unite_swipe_layout)
@@ -39,9 +39,9 @@ public class UniteFragment extends BaseFragment<UniteFragmentPresenter>
     ImageView ivBlur;
     @BindView(R.id.fragment_unite_recycler)
     RecyclerView recyclerView;
-    private UniteAdapter androidAdapter;
     @BindView(R.id.fragment_unite_appbar)
     AppBarLayout appBarLayout;
+    private UniteAdapter androidAdapter;
     private List<GankEntity> gankItemEntityList = new ArrayList<>( );
     private String tech;
 
@@ -51,12 +51,8 @@ public class UniteFragment extends BaseFragment<UniteFragmentPresenter>
     }
 
     @Override
-    protected UniteFragmentPresenter createPresenter() {
-        return new UniteFragmentPresenter( );
-    }
-
-    @Override
     protected void initParams() {
+        super.initParams( );
         tech = getArguments( ).getString( UniteFragmentPresenter.TECH );
     }
 

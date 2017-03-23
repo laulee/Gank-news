@@ -12,12 +12,11 @@ import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
 /**
- * Created by laulee on 17/2/27.
+ * Created by laulee on 17/3/23.
  */
 
-public abstract class BaseFragment<P extends BasePresenter> extends RxFragment implements BaseView {
+public abstract class BaseFragment extends RxFragment {
 
-    protected P mPresenter;
     private View rootView;
     private boolean isCreate = false;
     private boolean isVisible = false;
@@ -43,32 +42,11 @@ public abstract class BaseFragment<P extends BasePresenter> extends RxFragment i
     @Override
     public void onViewCreated( View view, @Nullable Bundle savedInstanceState ) {
         super.onViewCreated( view, savedInstanceState );
-        configPresenter( );
-        unbinder = ButterKnife.bind(this, view );
+        unbinder = ButterKnife.bind( this, view );
         initView( view );
         initParams( );
         isCreate = true;
         lazyLoad( );
-    }
-
-    private void configPresenter() {
-        mPresenter = createPresenter( );
-        if( mPresenter != null )
-            mPresenter.attachView( this );
-    }
-
-    protected abstract P createPresenter();
-
-    protected abstract void initParams();
-
-    protected abstract void initView( View rootView );
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy( );
-        unbinder.unbind( );
-        if( mPresenter != null )
-            mPresenter.destoryView( );
     }
 
     @Override
@@ -84,5 +62,16 @@ public abstract class BaseFragment<P extends BasePresenter> extends RxFragment i
         if( !isCreate || !isVisible( ) ) {
             return;
         }
+    }
+
+    protected abstract void initView( View view );
+
+    protected abstract void initParams();
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy( );
+        if( unbinder != null )
+            unbinder.unbind( );
     }
 }

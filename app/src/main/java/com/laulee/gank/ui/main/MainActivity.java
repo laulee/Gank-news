@@ -11,8 +11,6 @@ import android.view.MenuItem;
 
 import com.laulee.gank.R;
 import com.laulee.gank.base.BaseActivity;
-import com.laulee.gank.base.BasePresenter;
-import com.laulee.gank.presenter.MainPrenster;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -109,10 +107,5 @@ public class MainActivity extends BaseActivity {
     @Override
     protected int setContentViewId() {
         return R.layout.main_actvity;
-    }
-
-    @Override
-    protected BasePresenter createPresenter() {
-        return new MainPrenster( );
     }
 }

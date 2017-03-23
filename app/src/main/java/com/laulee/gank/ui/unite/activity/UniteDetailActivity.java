@@ -1,4 +1,4 @@
-package com.laulee.gank.ui.android.activity;
+package com.laulee.gank.ui.unite.activity;
 
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -6,7 +6,6 @@ import android.view.View;
 import com.laulee.gank.R;
 import com.laulee.gank.app.Constants;
 import com.laulee.gank.base.BaseActivity;
-import com.laulee.gank.base.BasePresenter;
 import com.laulee.gank.bean.GankEntity;
 import com.tencent.smtt.sdk.WebChromeClient;
 import com.tencent.smtt.sdk.WebSettings;
@@ -34,14 +33,14 @@ public class UniteDetailActivity extends BaseActivity {
             return;
         toolbar.setTitle( gankEntity.getDesc( ) );
         setSupportActionBar( toolbar );
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+        getSupportActionBar( ).setDisplayHomeAsUpEnabled( true );
+        getSupportActionBar( ).setDisplayShowHomeEnabled( true );
+        toolbar.setNavigationOnClickListener( new View.OnClickListener( ) {
             @Override
-            public void onClick(View view) {
-                finish();
+            public void onClick( View view ) {
+                finish( );
             }
-        });
+        } );
         configWebView( );
     }
 
@@ -80,10 +79,5 @@ public class UniteDetailActivity extends BaseActivity {
     @Override
     protected int setContentViewId() {
         return R.layout.android_detail;
-    }
-
-    @Override
-    protected BasePresenter createPresenter() {
-        return null;
     }
 }

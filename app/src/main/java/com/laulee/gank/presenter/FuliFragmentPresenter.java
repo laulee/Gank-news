@@ -16,10 +16,17 @@ import rx.schedulers.Schedulers;
 
 public class FuliFragmentPresenter extends RxPresenter<FuliFragmentContact.View> {
 
-    public void getFuliImage(String category,int count,int page) {
-        Subscription subscription = RetrofitHelper.getGitHubService( ).getGankData( category, count, page )
-                .subscribeOn( Schedulers.io( ) ).observeOn( AndroidSchedulers.mainThread( ) )
-                .map( ObserveMap::mapResult )
+    /**
+     * 获得图片
+     *
+     * @param category
+     * @param count
+     * @param page
+     */
+    public void getFuliImage( String category, int count, int page ) {
+        Subscription subscription = RetrofitHelper.getGitHubService( )
+                .getGankData( category, count, page ).subscribeOn( Schedulers.io( ) )
+                .observeOn( AndroidSchedulers.mainThread( ) ).map( ObserveMap::mapResult )
                 .subscribe( mView::showContent, new Action1<Throwable>( ) {
 
                     @Override

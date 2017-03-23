@@ -21,7 +21,7 @@
         </activity>
 
         <activity
-            android:name=".ui.android.activity.UniteDetailActivity"
+            android:name=".ui.unite.activity.UniteDetailActivity"
             android:screenOrientation="portrait"/>
         <activity
             android:name=".ui.fuli.activity.FuliDetailActivity"

@@ -10,8 +10,8 @@ import android.widget.Toast;
 
 import com.laulee.gank.R;
 import com.laulee.gank.app.Constants;
-import com.laulee.gank.base.BaseFragment;
 import com.laulee.gank.base.BaseRecyclerAdapter;
+import com.laulee.gank.base.RxBaseFragment;
 import com.laulee.gank.bean.GankEntity;
 import com.laulee.gank.presenter.FuliFragmentPresenter;
 import com.laulee.gank.presenter.contact.FuliFragmentContact;
@@ -27,7 +27,7 @@ import butterknife.BindView;
  * Created by laulee on 17/2/27.
  */
 
-public class FuliFragment extends BaseFragment<FuliFragmentPresenter>
+public class FuliFragment extends RxBaseFragment<FuliFragmentPresenter>
         implements FuliFragmentContact.View {
 
     private static final int SPAN_COUNT = 2;
@@ -48,12 +48,8 @@ public class FuliFragment extends BaseFragment<FuliFragmentPresenter>
     }
 
     @Override
-    protected FuliFragmentPresenter createPresenter() {
-        return new FuliFragmentPresenter( );
-    }
-
-    @Override
     protected void initParams() {
+        super.initParams( );
         mPresenter.getFuliImage( category, count, page );
     }
 
@@ -95,7 +91,7 @@ public class FuliFragment extends BaseFragment<FuliFragmentPresenter>
         if( swipeRefreshLayout.isRefreshing( ) ) {
             swipeRefreshLayout.setRefreshing( false );
         }
-        fuliAdapter.update( gankItemEntities );
+        fuliAdapter.addList( gankItemEntities );
     }
 
     @Override

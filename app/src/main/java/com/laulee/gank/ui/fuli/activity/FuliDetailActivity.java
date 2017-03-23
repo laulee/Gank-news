@@ -12,7 +12,6 @@ import com.bumptech.glide.request.target.SimpleTarget;
 import com.laulee.gank.R;
 import com.laulee.gank.app.Constants;
 import com.laulee.gank.base.BaseActivity;
-import com.laulee.gank.base.BasePresenter;
 import com.laulee.gank.bean.GankEntity;
 
 import butterknife.BindView;
@@ -61,10 +60,5 @@ public class FuliDetailActivity extends BaseActivity {
     @Override
     protected int setContentViewId() {
         return R.layout.activity_fuli_detail;
-    }
-
-    @Override
-    protected BasePresenter createPresenter() {
-        return null;
     }
 }
