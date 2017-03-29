@@ -1,6 +1,6 @@
 package com.laulee.gank.presenter.contact;
 
-import com.laulee.gank.base.BaseView;
+import com.laulee.commonsdk.base.BaseView;
 
 /**
  * Created by laulee on 17/2/26.

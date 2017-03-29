@@ -9,9 +9,9 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.SimpleTarget;
+import com.laulee.commonsdk.base.BaseActivity;
 import com.laulee.gank.R;
 import com.laulee.gank.app.Constants;
-import com.laulee.gank.base.BaseActivity;
 import com.laulee.gank.bean.GankEntity;
 
 import butterknife.BindView;

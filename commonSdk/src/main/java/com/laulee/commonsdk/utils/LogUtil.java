@@ -1,4 +1,4 @@
-package com.laulee.gank.utils;
+package com.laulee.commonsdk.utils;
 
 import android.content.Context;
 

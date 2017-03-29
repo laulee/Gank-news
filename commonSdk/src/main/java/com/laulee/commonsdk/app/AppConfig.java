@@ -1,4 +1,4 @@
-package com.laulee.gank.app;
+package com.laulee.commonsdk.app;
 
 import android.app.Activity;
 

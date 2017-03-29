@@ -1,17 +1,17 @@
 package com.laulee.gank.ui.fuli.fragment;
 
-import android.app.ActivityOptions;
 import android.content.Intent;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.View;
 import android.widget.Toast;
 
+import com.laulee.commonsdk.base.BaseRecyclerAdapter;
+import com.laulee.commonsdk.base.RxBaseFragment;
 import com.laulee.gank.R;
 import com.laulee.gank.app.Constants;
-import com.laulee.gank.base.BaseRecyclerAdapter;
-import com.laulee.gank.base.RxBaseFragment;
 import com.laulee.gank.bean.GankEntity;
 import com.laulee.gank.presenter.FuliFragmentPresenter;
 import com.laulee.gank.presenter.contact.FuliFragmentContact;
@@ -77,7 +77,8 @@ public class FuliFragment extends RxBaseFragment<FuliFragmentPresenter>
                         Intent intent = new Intent( getActivity( ), FuliDetailActivity.class );
                         intent.putExtra( Constants.GANK_INFO, entity );
                         View shareView = view.findViewById( R.id.iv_fuli_picture );
-                        ActivityOptions options = ActivityOptions
+                        //兼容5.0以下
+                        ActivityOptionsCompat options = ActivityOptionsCompat
                                 .makeSceneTransitionAnimation( getActivity( ), shareView,
                                                                "shareView" );
                         startActivity( intent, options.toBundle( ) );

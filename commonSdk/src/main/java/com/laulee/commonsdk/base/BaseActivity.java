@@ -1,8 +1,8 @@
-package com.laulee.gank.base;
+package com.laulee.commonsdk.base;
 
 import android.os.Bundle;
 
-import com.laulee.gank.app.AppConfig;
+import com.laulee.commonsdk.app.AppConfig;
 import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
 
 import butterknife.ButterKnife;
@@ -39,5 +39,6 @@ public abstract class BaseActivity extends RxAppCompatActivity {
         super.onDestroy( );
         if( unbinder != null )
             unbinder.unbind( );
+        AppConfig.removeActivity( this );
     }
 }

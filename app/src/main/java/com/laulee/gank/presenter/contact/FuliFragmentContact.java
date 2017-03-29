@@ -1,6 +1,6 @@
 package com.laulee.gank.presenter.contact;
 
-import com.laulee.gank.base.BaseView;
+import com.laulee.commonsdk.base.BaseView;
 import com.laulee.gank.bean.GankEntity;
 
 import java.util.List;

@@ -1,6 +1,6 @@
-package com.laulee.gank.http;
+package com.laulee.commonsdk.http;
 
-import com.laulee.gank.bean.HttpResult;
+import com.laulee.commonsdk.bean.HttpResult;
 
 /**
  * Created by laulee on 17/3/13.

@@ -1,4 +1,4 @@
-package com.laulee.gank.utils;
+package com.laulee.commonsdk.utils;
 
 import java.lang.reflect.ParameterizedType;
 

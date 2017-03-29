@@ -1,9 +1,9 @@
-package com.laulee.gank.utils;
+package com.laulee.commonsdk.utils;
 
 import android.content.Context;
 import android.net.ConnectivityManager;
 
-import com.laulee.gank.app.App;
+import com.laulee.commonsdk.app.App;
 
 /**
  * Created by laulee on 17/3/1.

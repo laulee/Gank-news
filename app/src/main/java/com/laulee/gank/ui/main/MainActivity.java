@@ -1,5 +1,6 @@
 package com.laulee.gank.ui.main;
 
+import android.content.DialogInterface;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -7,10 +8,12 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
+import android.view.KeyEvent;
 import android.view.MenuItem;
 
+import com.laulee.commonsdk.app.AppConfig;
+import com.laulee.commonsdk.base.BaseActivity;
 import com.laulee.gank.R;
-import com.laulee.gank.base.BaseActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -107,5 +110,28 @@ public class MainActivity extends BaseActivity {
     @Override
     protected int setContentViewId() {
         return R.layout.main_actvity;
+    }
+
+    @Override
+    public boolean onKeyDown( int keyCode, KeyEvent event ) {
+        if( keyCode == KeyEvent.KEYCODE_BACK ) {
+            showExitDialog( );
+        }
+        return super.onKeyDown( keyCode, event );
+    }
+
+    private void showExitDialog() {
+        android.support.v7.app.AlertDialog.Builder builder
+                = new android.support.v7.app.AlertDialog.Builder( this );
+        builder.setTitle( "提示" );
+        builder.setMessage( "确定退出吗" );
+        builder.setNegativeButton( "取消", null );
+        builder.setPositiveButton( "确定", new DialogInterface.OnClickListener( ) {
+            @Override
+            public void onClick( DialogInterface dialogInterface, int i ) {
+                AppConfig.exitApp( );
+            }
+        } );
+        builder.show( );
     }
 }

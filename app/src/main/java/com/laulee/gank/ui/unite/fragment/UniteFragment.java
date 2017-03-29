@@ -10,16 +10,16 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.laulee.commonsdk.base.BaseRecyclerAdapter;
+import com.laulee.commonsdk.base.RxBaseFragment;
+import com.laulee.commonsdk.utils.SystemUtil;
 import com.laulee.gank.R;
 import com.laulee.gank.app.Constants;
-import com.laulee.gank.base.BaseRecyclerAdapter;
-import com.laulee.gank.base.RxBaseFragment;
 import com.laulee.gank.bean.GankEntity;
 import com.laulee.gank.presenter.UniteFragmentPresenter;
 import com.laulee.gank.presenter.contact.UntieFragmentContact;
 import com.laulee.gank.ui.unite.activity.UniteDetailActivity;
 import com.laulee.gank.ui.unite.adapter.UniteAdapter;
-import com.laulee.gank.utils.SystemUtil;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.laulee.gank.base;
+package com.laulee.commonsdk.base;
 
 import rx.Subscription;
 import rx.subscriptions.CompositeSubscription;

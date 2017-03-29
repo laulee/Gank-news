@@ -1,4 +1,4 @@
-package com.laulee.gank.bean;
+package com.laulee.commonsdk.bean;
 
 /**
  * Created by laulee on 17/3/13.

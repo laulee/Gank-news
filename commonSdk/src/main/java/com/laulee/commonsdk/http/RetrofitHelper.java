@@ -1,9 +1,8 @@
-package com.laulee.gank.http;
+package com.laulee.commonsdk.http;
 
-import com.laulee.gank.BuildConfig;
-import com.laulee.gank.app.Constants;
-import com.laulee.gank.http.service.GitHubService;
-import com.laulee.gank.utils.SystemUtil;
+import com.laulee.commonsdk.BuildConfig;
+import com.laulee.commonsdk.app.Constants;
+import com.laulee.commonsdk.utils.SystemUtil;
 
 import java.io.File;
 import java.io.IOException;
@@ -26,12 +25,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RetrofitHelper {
 
-    private static GitHubService gitHubService = null;
-
     private RetrofitHelper() {
         //initOkHttpClent( );
-        gitHubService = createService( GitHubService.class, Constants.BASE_URL,
-                                       new OkHttpClient.Builder( ).build( ) );
     }
 
     /**
@@ -98,10 +93,6 @@ public class RetrofitHelper {
         //错误重连
         builder.retryOnConnectionFailure( true );
         return builder.build( );
-    }
-
-    public static GitHubService getGitHubService() {
-        return getInstance( ).gitHubService;
     }
 
     public <T> T createService( Class<T> serviceClass, String baseUrl, OkHttpClient okHttpClient ) {

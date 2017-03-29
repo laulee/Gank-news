@@ -1,6 +1,6 @@
-package com.laulee.gank.base;
+package com.laulee.commonsdk.base;
 
-import com.laulee.gank.utils.CreateUtil;
+import com.laulee.commonsdk.utils.CreateUtil;
 
 /**
  * Created by laulee on 16/12/18.

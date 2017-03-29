@@ -1,4 +1,4 @@
-package com.laulee.gank.http;
+package com.laulee.commonsdk.http;
 
 import com.google.gson.Gson;
 

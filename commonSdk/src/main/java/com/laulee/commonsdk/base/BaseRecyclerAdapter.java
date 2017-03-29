@@ -1,4 +1,4 @@
-package com.laulee.gank.base;
+package com.laulee.commonsdk.base;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;

@@ -6,8 +6,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 
+import com.laulee.commonsdk.base.BaseFragment;
 import com.laulee.gank.R;
-import com.laulee.gank.base.BaseFragment;
 import com.laulee.gank.presenter.UniteFragmentPresenter;
 import com.laulee.gank.ui.fuli.fragment.FuliFragment;
 import com.laulee.gank.ui.unite.fragment.UniteFragment;
