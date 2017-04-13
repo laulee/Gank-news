@@ -4,8 +4,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
 
-import com.laulee.commonsdk.base.BaseRecyclerAdapter;
 import com.laulee.gank.R;
+import com.laulee.gank.base.BaseRecyclerAdapter;
 import com.laulee.gank.bean.GankEntity;
 
 import java.util.List;

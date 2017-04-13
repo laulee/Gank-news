@@ -1,9 +1,8 @@
 package com.laulee.gank.http.service;
 
-
-import com.laulee.commonsdk.bean.HttpResult;
 import com.laulee.gank.bean.GankEntity;
 import com.laulee.gank.bean.GitHubUser;
+import com.laulee.gank.bean.HttpResult;
 
 import java.util.List;
 

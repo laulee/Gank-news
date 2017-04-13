@@ -1,11 +1,13 @@
 package com.laulee.gank.presenter;
 
-import com.laulee.commonsdk.base.RxPresenter;
-import com.laulee.commonsdk.http.ObserveMap;
-import com.laulee.commonsdk.http.RetrofitHelper;
 import com.laulee.gank.app.Constants;
+import com.laulee.gank.base.RxPresenter;
+import com.laulee.gank.http.ObserveMap;
+import com.laulee.gank.http.RetrofitHelper;
 import com.laulee.gank.http.service.GitHubService;
 import com.laulee.gank.presenter.contact.FuliFragmentContact;
+
+import javax.inject.Inject;
 
 import okhttp3.OkHttpClient;
 import rx.Subscription;
@@ -19,6 +21,13 @@ import rx.schedulers.Schedulers;
 
 public class FuliFragmentPresenter extends RxPresenter<FuliFragmentContact.View> {
 
+    private RetrofitHelper retrofitHelper;
+
+    @Inject
+    public FuliFragmentPresenter( RetrofitHelper retrofitHelper ) {
+        this.retrofitHelper = retrofitHelper;
+    }
+
     /**
      * 获得图片
      *
@@ -27,7 +36,7 @@ public class FuliFragmentPresenter extends RxPresenter<FuliFragmentContact.View>
      * @param page
      */
     public void getFuliImage( String category, int count, int page ) {
-        Subscription subscription = RetrofitHelper.getInstance( )
+        Subscription subscription = retrofitHelper
                 .createService( GitHubService.class, Constants.BASE_URL, new OkHttpClient( ) )
                 .getGankData( category, count, page ).subscribeOn( Schedulers.io( ) )
                 .observeOn( AndroidSchedulers.mainThread( ) ).map( ObserveMap::mapResult )

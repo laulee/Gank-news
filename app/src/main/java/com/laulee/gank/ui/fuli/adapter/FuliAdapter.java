@@ -10,9 +10,9 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.SimpleTarget;
-import com.laulee.commonsdk.base.BaseRecyclerAdapter;
 import com.laulee.gank.R;
 import com.laulee.gank.app.App;
+import com.laulee.gank.base.BaseRecyclerAdapter;
 import com.laulee.gank.bean.GankEntity;
 
 import java.util.List;

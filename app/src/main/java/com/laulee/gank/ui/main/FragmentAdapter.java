@@ -4,6 +4,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
+import com.trello.rxlifecycle.components.support.RxFragment;
+
 import java.util.List;
 
 /**
@@ -13,9 +15,9 @@ import java.util.List;
 public class FragmentAdapter extends FragmentPagerAdapter {
 
     String[] tabTitle = new String[]{ "Android", "iOS", "Web", "福利" };
-    private List<Fragment> fragmentList;
+    private List<RxFragment> fragmentList;
 
-    public FragmentAdapter( FragmentManager fm, List<Fragment> fragmentList ) {
+    public FragmentAdapter( FragmentManager fm, List<RxFragment> fragmentList ) {
         super( fm );
         this.fragmentList = fragmentList;
     }

@@ -1,6 +1,7 @@
 package com.laulee.gank.ui.main;
 
 import android.content.DialogInterface;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -11,9 +12,14 @@ import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
 import android.view.MenuItem;
 
-import com.laulee.commonsdk.app.AppConfig;
-import com.laulee.commonsdk.base.BaseActivity;
 import com.laulee.gank.R;
+import com.laulee.gank.app.AppConfig;
+import com.laulee.gank.base.RxBaseActivity;
+import com.laulee.gank.presenter.MainPrenster;
+import com.laulee.gank.presenter.contact.MainContact;
+import com.laulee.gank.ui.main.fragment.GankFragment;
+import com.laulee.gank.ui.main.fragment.SettingFragment;
+import com.laulee.gank.utils.SharedPreferenceUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +30,7 @@ import butterknife.BindView;
  * Created by laulee on 17/2/26.
  */
 
-public class MainActivity extends BaseActivity {
+public class MainActivity extends RxBaseActivity<MainPrenster> implements MainContact.MainView {
     @BindView(R.id.main_layout_toolbar)
     Toolbar toolbar;
     @BindView(R.id.main_layout_navigation)
@@ -35,6 +41,7 @@ public class MainActivity extends BaseActivity {
     private List<Fragment> fragments;
     private MenuItem mLastMenuItem;
     private ActionBarDrawerToggle mDrawerToggle;
+    private int currentItem = 0;
 
     /**
      * 切换fragment
@@ -43,12 +50,8 @@ public class MainActivity extends BaseActivity {
      */
     private void switchFragment( Fragment fragment ) {
         FragmentTransaction transaction = getSupportFragmentManager( ).beginTransaction( );
-        if( fragment != currentFragment ) {
-            if( !fragment.isAdded( ) ) {
-                transaction.add( R.id.main_layout_frame, fragment ).commitAllowingStateLoss( );
-            } else {
-                transaction.hide( currentFragment ).show( fragment );
-            }
+        if( currentFragment != fragment ) {
+            transaction.hide( currentFragment ).show( fragment ).commit( );
             currentFragment = fragment;
         }
     }
@@ -57,7 +60,7 @@ public class MainActivity extends BaseActivity {
     protected void initParams() {
         setSupportActionBar( toolbar );
         toolbar.setTitle( getResources( ).getString( R.string.app_name ) );
-        initFragments( );
+        initFragments( currentItem );
         mDrawerToggle = new ActionBarDrawerToggle( this, mDrawLayout, toolbar, R.string.drawer_open,
                                                    R.string.drawer_close );
         mDrawerToggle.syncState( );
@@ -70,21 +73,21 @@ public class MainActivity extends BaseActivity {
                     public boolean onNavigationItemSelected( @NonNull MenuItem item ) {
                         switch( item.getItemId( ) ) {
                             case R.id.nav_android:
-                                switchFragment( fragments.get( 0 ) );
+                                currentItem = 0;
                                 break;
                             case R.id.nav_ios:
-                                switchFragment( fragments.get( 0 ) );
-                                break;
+                                currentItem = 0;
                             case R.id.nav_fuli:
-                                switchFragment( fragments.get( 0 ) );
+                                currentItem = 0;
                                 break;
                             case R.id.nav_xiatuijian:
-                                switchFragment( fragments.get( 0 ) );
+                                currentItem = 0;
                                 break;
                             case R.id.nav_app:
-                                switchFragment( fragments.get( 0 ) );
+                                currentItem = 1;
                                 break;
                         }
+                        switchFragment( fragments.get( currentItem ) );
                         if( mLastMenuItem != null ) {
                             mLastMenuItem.setChecked( false );
                         }
@@ -95,16 +98,30 @@ public class MainActivity extends BaseActivity {
                         return true;
                     }
                 } );
-
-        switchFragment( fragments.get( 0 ) );
     }
 
     /**
-     * 初始化fragment
+     * 初始化fragments
      */
-    private void initFragments() {
+    private void initFragments( int position ) {
+        FragmentTransaction transaction = getSupportFragmentManager( ).beginTransaction( );
         fragments = new ArrayList<>( );
         fragments.add( new GankFragment( ) );
+        fragments.add( new SettingFragment( ) );
+        for( int i = 0; i < fragments.size( ); i++ ) {
+            transaction.add( R.id.main_layout_frame, fragments.get( i ),
+                             fragments.get( i ).getClass( ).getName( ) );
+            if( i != position ) {
+                transaction.hide( fragments.get( i ) );
+            }
+        }
+        transaction.commit( );
+        currentFragment = fragments.get( position );
+    }
+
+    @Override
+    protected void initInject() {
+        getActivityComponent( ).inject( this );
     }
 
     @Override
@@ -133,5 +150,25 @@ public class MainActivity extends BaseActivity {
             }
         } );
         builder.show( );
+    }
+
+    @Override
+    protected void onCreate( Bundle savedInstanceState ) {
+        super.onCreate( savedInstanceState );
+        if( savedInstanceState == null ) {
+            SharedPreferenceUtil.setNightModeState( false );
+        } else {
+            currentItem = 1;
+            switchFragment( fragments.get( currentItem ) );
+            navigationView.getMenu( ).findItem( R.id.nav_android ).setChecked( false );
+            toolbar.setTitle(
+                    navigationView.getMenu( ).findItem( R.id.nav_app ).getTitle( ).toString( ) );
+        }
+    }
+
+    //取消重建保存activity状态，避免fragment切换重叠
+    @Override
+    protected void onSaveInstanceState( Bundle outState ) {
+        //super.onSaveInstanceState( outState );
     }
 }

@@ -1,4 +1,4 @@
-package com.laulee.gank.;
+package com.laulee.gank;
 
 import org.junit.Test;
 

@@ -8,10 +8,10 @@ import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.View;
 import android.widget.Toast;
 
-import com.laulee.commonsdk.base.BaseRecyclerAdapter;
-import com.laulee.commonsdk.base.RxBaseFragment;
 import com.laulee.gank.R;
 import com.laulee.gank.app.Constants;
+import com.laulee.gank.base.BaseRecyclerAdapter;
+import com.laulee.gank.base.RxBaseFragment;
 import com.laulee.gank.bean.GankEntity;
 import com.laulee.gank.presenter.FuliFragmentPresenter;
 import com.laulee.gank.presenter.contact.FuliFragmentContact;
@@ -48,8 +48,12 @@ public class FuliFragment extends RxBaseFragment<FuliFragmentPresenter>
     }
 
     @Override
+    protected void initInject() {
+        getFragmentComponent().inject( this );
+    }
+
+    @Override
     protected void initParams() {
-        super.initParams( );
         mPresenter.getFuliImage( category, count, page );
     }
 
